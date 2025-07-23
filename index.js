@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json());
 const PORT = 3000;
 
 // This is a simple route for the root URL ('/')
@@ -19,6 +20,17 @@ app.get('/api/videos', (req, res) => {
 
   // Send the data back as a JSON response.
   res.json(mockVideos);
+});
+// ✨ NEW: User Registration Endpoint
+app.post('/api/register', (req, res) => {
+  // Get the email and password from the incoming request body
+  const { email, password } = req.body;
+
+  // For now, we just log it to our own console to show it works
+  console.log(`New user registered: Email - ${email}, Password - ${password}`);
+
+  // Send back a success message
+  res.status(201).json({ message: 'User registered successfully!' });
 });
 
 app.listen(PORT, () => {
