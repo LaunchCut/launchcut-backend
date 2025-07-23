@@ -1,20 +1,26 @@
-// Import the Express library, which we defined in package.json
 const express = require('express');
-
-// Create an instance of an Express application
 const app = express();
-
-// Define the port number our server will listen on. 3000 is standard for development.
 const PORT = 3000;
 
-// This is our first "API route".
-// When someone visits our server's main address, this function will run.
+// This is a simple route for the root URL ('/')
 app.get('/', (req, res) => {
-  res.send('Welcome to the LaunchCut API! The server is running.');
+  res.send('Welcome to the LaunchCut API!');
 });
 
-// Start the server and make it listen for requests on our specified port.
-// The message inside console.log will be displayed when the server starts successfully.
+// ✨ NEW: Our first real API endpoint
+app.get('/api/videos', (req, res) => {
+  // In the future, we'll get this data from a database.
+  // For now, we'll send back some "mock" (fake) data.
+  const mockVideos = [
+    { id: 1, title: 'My First Awesome Video' },
+    { id: 2, title: 'A Trip to the Mountains' },
+    { id: 3, title: 'Cooking Show: Episode 1' }
+  ];
+
+  // Send the data back as a JSON response.
+  res.json(mockVideos);
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
